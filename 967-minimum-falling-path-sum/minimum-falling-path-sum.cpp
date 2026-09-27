@@ -25,13 +25,10 @@ public:
         int m=matrix.size();
         int n=matrix[0].size();
 
-       
-
         int ans=INT_MAX;
-
+         vector<vector<int>> dp(m+1,vector<int>(n+1,INT_MAX));
         for(int i=0;i<n;i++)
         {
-             vector<vector<int>> dp(m+1,vector<int>(n+1,INT_MAX));
             ans=min(recursion(m-1,i,matrix,dp),ans);
         }
         return ans;
