@@ -17,8 +17,8 @@ public:
             {
                 dp[i][0]=true;
             }
-            if(nums[0]==target)
-            dp[0][nums[0]]=true;
+          //  if(nums[0]==target)
+          //  dp[0][nums[0]]=true;
             for(int ind=1;ind<nums.size();ind++)
             {
                 for(int t=1;t<=target;t++)
