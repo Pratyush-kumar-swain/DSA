@@ -10,14 +10,12 @@ public:
         int profit=0;
         if(buy)
         {
-           profit=max(-prices[ind]+f(ind+1,0,cap,prices,dp),f(ind+1,1,cap,prices,dp));
+        return dp[ind][buy][cap]=max(-prices[ind]+f(ind+1,0,cap,prices,dp),f(ind+1,1,cap,prices,dp));
         }
-        else
-        {
-            profit=max(prices[ind]+f(ind+1,1,cap-1,prices,dp),f(ind+1,0,cap,prices,dp));
-        }
+        
+        return dp[ind][buy][cap]=max(prices[ind]+f(ind+1,1,cap-1,prices,dp),f(ind+1,0,cap,prices,dp));
 
-        return dp[ind][buy][cap]=profit;
+   
 
     }
     int maxProfit(vector<int>& prices) {
