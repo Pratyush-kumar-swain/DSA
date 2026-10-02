@@ -12,7 +12,7 @@ public:
         {
         return dp[ind][buy][cap]=max(-prices[ind]+f(ind+1,0,cap,prices,dp),f(ind+1,1,cap,prices,dp));
         }
-        
+
         return dp[ind][buy][cap]=max(prices[ind]+f(ind+1,1,cap-1,prices,dp),f(ind+1,0,cap,prices,dp));
 
    
@@ -20,9 +20,42 @@ public:
     }
     int maxProfit(vector<int>& prices) {
         int p=prices.size();
-        vector<vector<vector<int>>> dp(p,
+        vector<vector<vector<int>>> dp(p+1,
                                     vector<vector<int>>(2,vector<int>(3,-1)));
 
-        return f(0,1,2,prices,dp);
+        for(int i=0;i<=p;i++)
+        {
+            for(int j=0;j<=1;j++)
+            {
+                dp[i][j][0]=0;
+            }
+        }
+        for(int i=0;i<=1;i++)
+        {
+            for(int j=0;j<=2;j++)
+            {
+                dp[p][i][j]=0;
+            }
+        }
+        for(int ind=p-1;ind>=0;ind--)
+        {
+            for(int buy=0;buy<=1;buy++)
+            {
+                for(int cap=1;cap<=2;cap++)
+                {
+                    if(buy)
+                    {
+                        dp[ind][buy][cap]=max(-prices[ind]+dp[ind+1][0][cap],dp[ind+1][1][cap]);
+                    }
+                    else
+                    {
+                        dp[ind][buy][cap]=max(prices[ind]+dp[ind+1][1][cap-1],dp[ind+1][0][cap]);
+                    }
+                }
+            }
+        }
+
+       // return f(0,1,2,prices,dp);
+     return dp[0][1][2];
     }
 };
